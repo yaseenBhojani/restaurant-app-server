@@ -10,6 +10,12 @@ import { UpdateFoodDto } from '../dto/updateFoodDto';
 export class FoodService {
   constructor(@InjectModel(Food.name) private foodModel: Model<FoodDocument>) {}
 
+  /**
+   * Creates a new food item.
+   * @param createFoodDto The data for creating a food item.
+   * @returns The created food item.
+   * @throws An error if there was a problem creating the food item.
+   */
   async create(createFoodDto: CreateFoodDto): Promise<Food> {
     try {
       const createdFood = new this.foodModel(createFoodDto);
@@ -19,6 +25,11 @@ export class FoodService {
     }
   }
 
+  /**
+   * Retrieves all food items.
+   * @returns An array of food items.
+   * @throws An error if there was a problem retrieving the food items.
+   */
   async findAll(): Promise<Food[]> {
     try {
       return await this.foodModel.find().exec();
@@ -27,6 +38,12 @@ export class FoodService {
     }
   }
 
+  /**
+   * Retrieves a food item by its ID.
+   * @param id The ID of the food item.
+   * @returns The found food item.
+   * @throws An error if the food item with the specified ID was not found.
+   */
   async findOne(id: string): Promise<Food> {
     try {
       const food = await this.foodModel.findById(id).exec();
@@ -39,6 +56,13 @@ export class FoodService {
     }
   }
 
+  /**
+   * Updates a food item by its ID.
+   * @param id The ID of the food item.
+   * @param updateFoodDto The data for updating the food item.
+   * @returns The updated food item.
+   * @throws An error if the food item with the specified ID was not found or if there was a problem updating it.
+   */
   async update(id: string, updateFoodDto: UpdateFoodDto): Promise<Food> {
     try {
       const updatedFood = await this.foodModel
@@ -53,6 +77,12 @@ export class FoodService {
     }
   }
 
+  /**
+   * Deletes a food item by its ID.
+   * @param id The ID of the food item.
+   * @returns The deleted food item.
+   * @throws An error if the food item with the specified ID was not found or if there was a problem deleting it.
+   */
   async remove(id: string): Promise<Food> {
     try {
       const deletedFood = await this.foodModel.findByIdAndRemove(id).exec();

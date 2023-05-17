@@ -20,11 +20,12 @@ export class RoleGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const authHeader = request.headers.authorization;
 
+    // Check if Authorization header is present and starts with 'Bearer '
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       throw new UnauthorizedException();
     }
 
-    const accessToken = authHeader.slice(7);
+    const accessToken = authHeader.slice(7); // Extract token from the header
 
     try {
       const { role } = await this.jwtService.verifyAsync(accessToken, {
@@ -32,12 +33,12 @@ export class RoleGuard implements CanActivate {
       });
 
       if (role === 'ADMIN') {
-        return true;
+        return true; // Allow access if the user has the 'ADMIN' role
       } else {
-        return false;
+        return false; // Deny access if the user does not have the 'ADMIN' role
       }
     } catch (error) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException(); // Throw an exception if there's an error or the token is invalid
     }
   }
 }

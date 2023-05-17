@@ -10,8 +10,10 @@ import { User, UserSchema } from '../user/user.schema';
 @Module({
   imports: [
     AuthModule,
-    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
-    MongooseModule.forFeature([{ name: Food.name, schema: FoodSchema }]),
+    MongooseModule.forFeature([
+      { name: User.name, schema: UserSchema },
+      { name: Food.name, schema: FoodSchema },
+    ]),
   ],
   controllers: [FoodController],
   providers: [FoodService],

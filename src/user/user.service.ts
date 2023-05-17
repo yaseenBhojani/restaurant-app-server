@@ -7,8 +7,20 @@ import { User } from './user.schema';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
+  constructor(
+    @InjectModel(User.name) private readonly userModel: Model<User>,
+  ) {}
 
+  /**
+   * Creates a new user.
+   * @param username The username of the user.
+   * @param email The email of the user.
+   * @param password The password of the user.
+   * @param role The role of the user.
+   * @returns An object containing the ID of the created user.
+   * @throws A ConflictException if a user with the provided email already exists.
+   * @throws An error if there was a problem creating the user.
+   */
   async createUser(
     username: string,
     email: string,
@@ -37,6 +49,12 @@ export class UsersService {
     }
   }
 
+  /**
+   * Finds a user by their email.
+   * @param email The email of the user.
+   * @returns The found user or undefined if not found.
+   * @throws An error if there was a problem finding the user by email.
+   */
   async findByEmail(email: string): Promise<User | undefined> {
     try {
       const user = await this.userModel.findOne({ email }).exec();

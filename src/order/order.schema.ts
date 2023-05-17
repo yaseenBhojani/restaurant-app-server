@@ -1,5 +1,5 @@
-import mongoose, { Document } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 import { OrderItem } from 'src/dto/orderItemDto';
 
 export type OrderDocument = Order & Document;
@@ -43,7 +43,7 @@ export class Order {
   })
   status: string;
 
-  @Prop({ type: Date, default: Date.now })
+  @Prop({ default: Date.now })
   createdAt: Date;
 }
 

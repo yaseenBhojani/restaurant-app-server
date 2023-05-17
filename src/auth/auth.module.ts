@@ -10,7 +10,6 @@ import { UsersModule } from '../user/user.module';
   imports: [
     UsersModule,
 
-    // Register the JwtModule with the global option and the JWT_SECRET
     JwtModule.register({
       global: true,
       secret: JWT_SECRET,
