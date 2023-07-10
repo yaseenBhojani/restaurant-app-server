@@ -13,7 +13,7 @@ async function bootstrap() {
 
   // Enable Cross-Origin Resource Sharing (CORS)
   app.enableCors({
-    origin: ['https://spiceroutekitchen.netlify.app/', 'http://localhost:3000'],
+    origin: ['https://spiceroutekitchen.netlify.app', 'http://localhost:3000'],
     methods: 'GET, HEAD, PUT, POST, DELETE, OPTIONS, PATCH',
     credentials: true,
     allowedHeaders:
