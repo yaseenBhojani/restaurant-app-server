@@ -5,13 +5,13 @@ import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
 
   app.use(cookieParser());
-  app.enableCors({
-    origin: 'https://spiceroutekitchen.netlify.app',
-    credentials: true, // Allow sending and receiving cookies across origins
-  });
+  // app.enableCors({
+  //   origin: 'https://spiceroutekitchen.netlify.app',
+  //   credentials: true, // Allow sending and receiving cookies across origins
+  // });
 
   app.useGlobalPipes(new ValidationPipe());
 
