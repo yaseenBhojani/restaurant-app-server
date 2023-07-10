@@ -12,7 +12,9 @@ async function bootstrap() {
   app.use(cookieParser());
 
   // Enable Cross-Origin Resource Sharing (CORS)
-  app.enableCors();
+  app.enableCors({
+    origin: 'https://spiceroutekitchen.netlify.app',
+  });
 
   // Global validation pipe to validate incoming request payloads
   app.useGlobalPipes(new ValidationPipe());
