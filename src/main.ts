@@ -1,4 +1,4 @@
-import * as cookieParser from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 
@@ -18,7 +18,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   // Start listening on the specified port (default: 3333)
-  await app.listen(process.env.PORT || 3333);
+  await app.listen(3000);
 }
 
 // Bootstrap the Nest application
