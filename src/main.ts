@@ -1,6 +1,7 @@
 import cookieParser from 'cookie-parser';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
+import cors from 'cors';
 
 import { AppModule } from './app.module';
 
@@ -12,9 +13,8 @@ async function bootstrap() {
   app.use(cookieParser());
 
   // Enable Cross-Origin Resource Sharing (CORS)
-  app.enableCors({
-    origin: 'https://spiceroutekitchen.netlify.app',
-  });
+  // app.enableCors();
+  app.use(cors());
 
   // Global validation pipe to validate incoming request payloads
   app.useGlobalPipes(new ValidationPipe());
