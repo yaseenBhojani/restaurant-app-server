@@ -1,27 +1,24 @@
-import cookieParser from 'cookie-parser';
+import * as cookieParser from 'cookie-parser';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
-import cors from 'cors';
 
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  // Create a Nest application instance
   const app = await NestFactory.create(AppModule);
 
-  // Middleware: Parse cookies
   app.use(cookieParser());
+  app.enableCors({
+    origin: 'https://spiceroutekitchen.netlify.app',
+    credentials: true, // Allow sending and receiving cookies across origins
+  });
 
-  // Enable Cross-Origin Resource Sharing (CORS)
-  // app.enableCors();
-  app.use(cors());
-
-  // Global validation pipe to validate incoming request payloads
   app.useGlobalPipes(new ValidationPipe());
 
-  // Start listening on the specified port (default: 3333)
-  await app.listen(3000);
+  const port = process.env.PORT || 3000;
+  await app.listen(port, () => {
+    console.log(`Server started on port ${port}`);
+  });
 }
 
-// Bootstrap the Nest application
 bootstrap();
